@@ -42,10 +42,9 @@ function drawPoly(x, y, posx, posy, size, color) {
 	c.fillStyle = color
 	c.fill()
 
-	// text
-	// c.font = '18px Arial'
-	// c.fillStyle = 'white'
-	// c.fillText(x + ':' + y, posx - 15, posy + 5)
+	c.font = '14px Arial'
+	c.fillStyle = 'black'
+	c.fillText(x + ':' + y, posx, posy - 30)
 }
 
 var getId = (x, y) => (y - 1) * 5 + x - 1
@@ -66,10 +65,24 @@ var render = (xOffset, yOffset, r) => {
 			var yDiff = Math.floor(y / 2)
 			if (y % 2 == 0) {
 				drawPoly(x, y, 150 * x - 100 + xOffset, 86 * yDiff + 20 + yOffset, 50, getColor(data[getId(x, y)]))
-				c.drawImage(sprite.canvas, 150 * x - 100 + xOffset - 32, 86 * yDiff + 20 + yOffset - 32, 64, 64)
+
+				var i = 150 * x - 100 + xOffset
+				var j = 86 * yDiff + 20 + yOffset
+				c.translate(i, j)
+				c.rotate((30 * PI) / 180)
+				c.drawImage(sprite2.canvas, -32, -32, 64, 64)
+				c.rotate(-(30 * PI) / 180)
+				c.translate(-i, -j)
 			} else {
 				drawPoly(x, y, 150 * x - 25 + xOffset, 43 + 86 * yDiff + 20 + yOffset, 50, getColor(data[getId(x, y)]))
-				c.drawImage(sprite2.canvas, 150 * x - 25 + xOffset - 32, 43 + 86 * yDiff + 20 + yOffset - 32, 64, 64)
+
+				var i = 150 * x - 25 + xOffset
+				var j = 43 + 86 * yDiff + 20 + yOffset
+				c.translate(i, j)
+				c.rotate((30 * PI) / 180)
+				c.drawImage(sprite.canvas, -32, -32, 64, 64)
+				c.rotate(-(30 * PI) / 180)
+				c.translate(-i, -j)
 			}
 		}
 	}
